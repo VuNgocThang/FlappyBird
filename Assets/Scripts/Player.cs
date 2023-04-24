@@ -34,13 +34,29 @@ public class Player : MonoBehaviour
                 direction = Vector3.up * height;
             }
         }
+        if (rb.velocity.y < -1f)
+        {
+            anim.Play("Bird_Drop");
+        }
 
         direction.y += gravity * Time.deltaTime;
         transform.position += direction * Time.deltaTime;
 
-        if(direction.y < 0)
-        {
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        FindObjectOfType<GameManager>().GameOver();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Scoring"))
+        {
+            FindObjectOfType<GameManager>().IncreaseScore();
         }
     }
+
+
 }
