@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
 
+    public GameManager gameManager;
+
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -24,6 +27,11 @@ public class Player : MonoBehaviour
             rb.velocity = Vector3.zero;
             anim.Play("Bird_Touch");
         }
+/*
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            gameManager.Pause();
+        }*/
 
         if (Input.touchCount > 0)
         {
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
                 direction = Vector3.up * height;
             }
         }
+
         if (rb.velocity.y < -1f)
         {
             anim.Play("Bird_Drop");
